@@ -1,32 +1,36 @@
 import TodoInput from "./components/TodoInput/TodoInput";
 import TodoItem from "./components/TodoItem/TodoItem";
 import { Typography, Box, Container } from "@mui/material";
+import TodoContext from "./TodoContext/TodoContext";
+
 function App() {
   return (
     <>
-      <Container
-        sx={{
-          display: "flex",
-          flexDirection: "column", // Задачи пойдут вниз
-          alignItems: "center", // Центрируем по горизонтали
-          gap: 2, // Отступ между инпутом и списком
-          mt: 4,
-        }}
-      >
-        <Typography
-          variant="h2"
-          component="h2"
-          sx={{ color: "#2196f3", display: "flex", justifyContent: "center" }}
+      <TodoContext>
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 2,
+            mt: 4,
+          }}
         >
-          TODO
-        </Typography>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <TodoInput />
-        </Box>
-        <Box sx={{ marginTop: 10 }}>
-          <TodoItem />
-        </Box>
-      </Container>
+          <Typography
+            variant="h2"
+            component="h2"
+            sx={{ color: "#2196f3", display: "flex", justifyContent: "center" }}
+          >
+            TODO
+          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <TodoInput />
+          </Box>
+          <Box sx={{ marginTop: 10 }}>
+            <TodoItem />
+          </Box>
+        </Container>
+      </TodoContext>
     </>
   );
 }
