@@ -1,8 +1,13 @@
 import { Box, Checkbox, IconButton, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/EditOutlined";
+import { useDispatch } from "../../TodoContext/TodoContext";
 
-const TodoItem = ({ text = "Пример задачи", isCompleted = false }) => {
+const TodoItem = ({ todo }) => {
+  const dispatch = useDispatch();
+
+  if (!todo) return null;
+
   return (
     <Box
       sx={{
@@ -15,15 +20,42 @@ const TodoItem = ({ text = "Пример задачи", isCompleted = false }) =
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <Checkbox checked={isCompleted} />
-        <Typography sx={{ color: "white" }}>{text}</Typography>
+        <Checkbox
+          checked={todo.status}
+          onChange={() =>
+            dispatch({
+              type: "TOGGLE_STATUS",
+              payload: {
+                id: todo.id,
+                status: !todo.status,
+              },
+            })
+          }
+        />
+        <Typography
+          sx={{
+            color: "white",
+            textDecoration: todo.status ? "line-through" : "none",
+            opacity: todo.status ? 0.6 : 1,
+          }}
+        >
+          {todo.task}
+        </Typography>
       </Box>
 
       <Box>
         <IconButton sx={{ color: "#00B2FF" }}>
           <EditIcon />
         </IconButton>
-        <IconButton sx={{ color: "#FF8A00" }}>
+        <IconButton
+          sx={{ color: "#FF8A00" }}
+          onClick={() =>
+            dispatch({
+              type: "REMOVE_TASK",
+              payload: { id: todo.id },
+            })
+          }
+        >
           <DeleteIcon />
         </IconButton>
       </Box>
