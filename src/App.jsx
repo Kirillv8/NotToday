@@ -2,6 +2,7 @@ import TodoInput from "./components/TodoInput/TodoInput";
 import TodoItem from "./components/TodoItem/TodoItem";
 import { Typography, Box, Container } from "@mui/material";
 import TodoContext from "./TodoContext/TodoContext";
+import TodoList from "./components/TodoList/TodoList";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Box>
           <Box sx={{ marginTop: 10 }}>
             <TodoItem />
+          </Box>
+          <Box>
+            <TodoList />
           </Box>
         </Container>
       </TodoContext>
